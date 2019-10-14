@@ -4,7 +4,7 @@ FROM openjdk:8-jre-stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV SCALA_VERSION 2.11
-ENV KAFKA_VERSION 2.2.1
+ENV KAFKA_VERSION 2.3.0
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
 
 # Install Kafka, Zookeeper and other needed things
@@ -12,7 +12,9 @@ RUN apt-get update
 RUN apt-get install -y zookeeper wget supervisor dnsutils
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get clean
-RUN wget -q http://apachemirror.wuchna.com/kafka/${KAFKA_VERSION}/kafka-${KAFKA_VERSION}-src.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+RUN wget -q http://apachemirror.wuchna.com/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+
+
 RUN tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt
 RUN rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
 
